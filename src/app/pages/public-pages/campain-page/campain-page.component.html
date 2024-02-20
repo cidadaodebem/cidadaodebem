@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <ng-container *ngIf="campainId$ | async as campainId; else campainNotDefined">
+    <ng-container
+      *ngIf="campainsMap[campainId] as campainInfo; else campainNotFoundTmpl"
+    >
+      <iframe
+        [src]="campainInfo.iframeUrl | urlSanitizer"
+        frameborder="0"
+      ></iframe>
+    </ng-container>
+    <ng-template #campainNotFoundTmpl>
+      <h1>Campanha {{ campainId }} não encontrada</h1>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #campainNotDefined>
+    <h1>Nenhuma campanha definida</h1>
+  </ng-template>
+</div>

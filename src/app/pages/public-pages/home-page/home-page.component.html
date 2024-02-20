@@ -1,0 +1,15 @@
+<h1>Cidadão de Bem</h1>
+
+<h2>Vamos fiscalizar juntos os agentes publicos!!!</h2>
+
+<div>
+  <h3>Campanhas de fiscalização</h3>
+  <ul>
+    <li *ngFor="let campain of campainsList">
+      <a routerLink="campain" [queryParams]="{ campain: campain.path }">
+        <div>{{ campain.label }}</div>
+        <div>{{ campain.description }}</div>
+      </a>
+    </li>
+  </ul>
+</div>
