@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<div class="header">
+  <div class="header">
+    <a routerLink="/" class="header-brand">
+      <div>
+        <img src="/assets/img/logo.png" alt="" />
+      </div>
+      <div class="app-title">
+        <span class="title"> {{ constants.title }} </span>
+        <span class="subtitle"> {{ constants.subtitle }} </span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="no-header">
+  <div class="left-menu" *ngIf="showLeftMenu$ | async">left</div>
+  <div class="router">
+    <router-outlet></router-outlet>
+  </div>
+</div>

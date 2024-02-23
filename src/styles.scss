@@ -1,9 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
-body, app-root {
-    margin: 0px;
-    padding: 0px;
-    width: 100dvw;
-    height: 100dvh;
-    max-width: 100dvw;
-    max-height: 100dvh;
+body,
+app-root {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  width: 100dvw;
+  height: 100dvh;
+  max-width: 100dvw;
+  max-height: 100dvh;
+  background-color: #162c46;
+  color: white;
+  min-width: 320px;
+  overflow: auto;
+
+  font-family: "Anta", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0px;
+  margin: 0px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background-color: #d9b952;
+  color: #162c46;
+  padding: 16px;
+  font-size: large;
 }

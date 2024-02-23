@@ -16,9 +16,7 @@ import { campainsMap } from '../../constants/campains';
 export class CampainPageComponent {
   route = inject(ActivatedRoute);
 
-  campainId$ = this.route.queryParams.pipe(
-    map((params) => params['campain'] as string),
-  );
+  campainId$ = this.route.params.pipe(map((params) => params['id'] as string));
 
   campainsMap = campainsMap;
 }
