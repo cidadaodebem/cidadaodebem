@@ -3,6 +3,7 @@
   <ul>
     <li
       *ngFor="let campain of campainsList"
+      class="click"
       [routerLink]="['/campain', campain.path]"
     >
       <app-card>
