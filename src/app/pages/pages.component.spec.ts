@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { RouterTestingModule } from '@angular/router/testing';
 import { PagesComponent } from './pages.component';
 
 describe('PagesComponent', () => {
@@ -8,10 +9,9 @@ describe('PagesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PagesComponent]
-    })
-    .compileComponents();
-    
+      imports: [PagesComponent, RouterTestingModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(PagesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

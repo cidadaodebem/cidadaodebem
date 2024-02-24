@@ -1,4 +1,4 @@
-import { CampainMap } from '../models/campain.models';
+import { CampainMap } from '../../models/campain.models';
 
 export const campainsList = [
   {

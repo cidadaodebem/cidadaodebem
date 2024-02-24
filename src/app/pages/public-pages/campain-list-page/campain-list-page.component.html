@@ -1,11 +1,14 @@
 <div class="campain-list">
   <h3>Campanhas de fiscalização</h3>
   <ul>
-    <li *ngFor="let campain of campainsList">
-      <a [routerLink]="['/campain', campain.path]">
+    <li
+      *ngFor="let campain of campainsList"
+      [routerLink]="['/campain', campain.path]"
+    >
+      <app-card>
         <div>{{ campain.label }}</div>
         <div>{{ campain.description }}</div>
-      </a>
+      </app-card>
     </li>
   </ul>
 </div>
