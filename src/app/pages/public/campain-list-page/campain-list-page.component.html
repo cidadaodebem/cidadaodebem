@@ -1,0 +1,23 @@
+<div class="campain-list">
+  <h3>Campanhas de fiscalização</h3>
+
+  <table *ngIf="campainsList$ | async as campainsList">
+    <thead>
+      <tr>
+        <th>Campain</th>
+        <th>Agent</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        *ngFor="let campain of campainsList"
+        [routerLink]="['/campain', campain.id]"
+        class="pointer"
+      >
+        <td>{{ campain.title }}</td>
+        <td>{{ campain.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

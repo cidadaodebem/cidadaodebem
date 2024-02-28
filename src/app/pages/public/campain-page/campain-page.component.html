@@ -1,10 +1,10 @@
 <div class="wrapper">
   <ng-container *ngIf="campainId$ | async as campainId; else campainNotDefined">
     <ng-container
-      *ngIf="campainsMap[campainId] as campainInfo; else campainNotFoundTmpl"
+      *ngIf="campain$ | async as campainInfo; else campainNotFoundTmpl"
     >
       <iframe
-        [src]="campainInfo.iframeUrl | urlSanitizer"
+        [src]="campainInfo.image_url | urlSanitizer"
         frameborder="0"
       ></iframe>
     </ng-container>

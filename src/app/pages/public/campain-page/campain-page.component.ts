@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
-import { UrlSanitizerPipe } from '../../../pipes/url-sanitizer.pipe';
-import { campainsMap } from '../../constants/campains';
+import { UrlSanitizerPipe } from '@pipes/url-sanitizer.pipe';
+import { CampainService } from '@services/campain/campain.service';
+import { map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-campain-page',
@@ -16,7 +16,13 @@ import { campainsMap } from '../../constants/campains';
 export class CampainPageComponent {
   route = inject(ActivatedRoute);
 
+  private campainService = inject(CampainService);
+
   campainId$ = this.route.params.pipe(map((params) => params['id'] as string));
 
-  campainsMap = campainsMap;
+  campain$ = this.campainId$.pipe(
+    switchMap((campainId) => {
+      return this.campainService.get(campainId);
+    }),
+  );
 }

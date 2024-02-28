@@ -1,8 +1,8 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { appConstants } from '@constants/app.constants';
 import { ReplaySubject } from 'rxjs';
-import { appConstants } from '../constants/app.constants';
 
 @Component({
   selector: 'app-pages',

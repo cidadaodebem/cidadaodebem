@@ -1,8 +1,13 @@
 export type Campain = {
-  label: string;
+  id: string;
+  created_at: string;
+  author: number;
+  agent: number;
+  title: string;
+  subtitle: string;
   description: string;
-  iframeUrl: string;
-  path: string;
+  video_url: string;
+  image_url: string;
 };
 
 export type CampainMap = {
