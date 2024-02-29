@@ -1,15 +1,25 @@
-<div class="header">
-  <a routerLink="/" class="header-brand">
-    <div>
-      <img src="/assets/img/logo.png" alt="" />
+<div class="header-wrapper">
+  <div class="header content-width">
+    <a routerLink="/" class="header-brand">
+      <div>
+        <img src="/assets/img/logo.png" alt="" />
+      </div>
+      <div class="app-title">
+        <span class="title"> {{ constants.title }} </span>
+        <span class="subtitle"> {{ constants.subtitle }} </span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <a *ngIf="(user$ | async) === undefined" [routerLink]="['/auth']"
+        >Login</a
+      >
+
+      <span *ngIf="user$ | async as user">
+        <a [routerLink]="['/profile', user.id]">{{ user.name }}</a>
+
+        <button (click)="logout()">Sair</button>
+      </span>
     </div>
-    <div class="app-title">
-      <span class="title"> {{ constants.title }} </span>
-      <span class="subtitle"> {{ constants.subtitle }} </span>
-    </div>
-  </a>
-  <div class="header-actions">
-    <a [routerLink]="['/auth-otp']">Login</a>
   </div>
 </div>
 

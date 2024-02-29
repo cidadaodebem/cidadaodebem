@@ -1,19 +1,81 @@
-<div class="wrapper">
-  <ng-container *ngIf="campainId$ | async as campainId; else campainNotDefined">
+<div class="wrapper content-width">
+  <ng-container *ngIf="campainId$ | async; else campainNotDefined">
     <ng-container
-      *ngIf="campain$ | async as campainInfo; else campainNotFoundTmpl"
+      *ngIf="campain$ | async; then campainTmpl; else campainNotFoundTmpl"
     >
-      <iframe
-        [src]="campainInfo.image_url | urlSanitizer"
-        frameborder="0"
-      ></iframe>
     </ng-container>
-    <ng-template #campainNotFoundTmpl>
-      <h1>Campanha {{ campainId }} não encontrada</h1>
-    </ng-template>
   </ng-container>
-
-  <ng-template #campainNotDefined>
-    <h1>Nenhuma campanha definida</h1>
-  </ng-template>
 </div>
+
+<ng-template #campainNotFoundTmpl>
+  <h1>Campanha {{ campainId$ | async }} não encontrada</h1>
+</ng-template>
+
+<ng-template #campainNotDefined>
+  <h1>Nenhuma campanha definida</h1>
+</ng-template>
+
+<ng-template #campainTmpl let-campain="campain">
+  <div *ngIf="campain$ | async as campain" class="campain">
+    <div>
+      <h1>{{ campain.title }}</h1>
+
+      <small>{{ campain.subtitle }}</small>
+    </div>
+
+    <div class="campain-midias">
+      <div class="campain-image">
+        <img
+          [src]="campain.image_url"
+          alt="{{ campain.title }} campain image"
+        />
+      </div>
+      <div class="campain-video">
+        <iframe
+          [src]="campain.video_url | urlSanitizer"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          controls
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="pre">{{ campain.description }}</div>
+
+    <div class="resource-card">
+      AUTOR
+
+      <a [routerLink]="['/profile', campain.author.id]" class="resource-card">
+        <img
+          class="avatar"
+          [src]="campain.author.photo"
+          alt="author {{ campain.author.name }} photo"
+        />
+        {{ campain.author.name }}</a
+      >
+    </div>
+
+    <div class="resource-card">
+      INVESTIGADO
+      <a [routerLink]="['/agent', campain.agent.id]" class="resource-card">
+        <img
+          class="avatar"
+          [src]="campain.agent.photo"
+          alt="agent {{ campain.agent.name }} photo"
+        />
+        {{ campain.agent.name }}
+      </a>
+
+      -
+
+      <a
+        [routerLink]="['/party', campain.agent.party.id]"
+        class="resource-card"
+        [title]="campain.agent.party.name"
+        >{{ campain.agent.party.short_name }}</a
+      >
+    </div>
+  </div>
+</ng-template>

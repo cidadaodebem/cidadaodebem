@@ -3,4 +3,5 @@ export type UserProfile = {
   name: string;
   bio: string;
   photo: string;
+  twitter?: string;
 };

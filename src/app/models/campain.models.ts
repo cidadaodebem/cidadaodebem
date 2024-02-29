@@ -3,7 +3,7 @@ import { UserProfile } from './user.models';
 
 export type Campain = {
   id: string;
-  created_at: string;
+  created_at: Date;
   author: UserProfile;
   agent: Agent;
   title: string;

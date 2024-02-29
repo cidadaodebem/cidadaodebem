@@ -1,0 +1,20 @@
+<div *ngIf="party$ | async as party" class="party-page content-width">
+  <h1>{{ party.name }}</h1>
+
+  <div class="party-wrapper">
+    <div>
+      <img
+        class="avatar-big"
+        [src]="party.photo"
+        alt="party {{ party.name }} photo"
+      />
+    </div>
+
+    <div class="party-data">
+      <div>
+        Mais informações:
+        <a [href]="party.website" target="_blank">{{ party.website }}</a>
+      </div>
+    </div>
+  </div>
+</div>

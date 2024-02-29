@@ -31,7 +31,7 @@ export class DbService {
         .single(),
     ).pipe(
       map((res) => {
-        return res.data;
+        return res.data || undefined;
       }),
     );
   }

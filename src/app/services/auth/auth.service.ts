@@ -1,22 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProfileService } from '@services/profile/profile.service';
 import { SupabaseService } from '@services/supabase/supabase.service';
-import { User } from '@supabase/supabase-js';
-import { BehaviorSubject } from 'rxjs';
+import { AuthChangeEvent, User } from '@supabase/supabase-js';
+import { ReplaySubject, of, shareReplay, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private _currentUser: BehaviorSubject<boolean | User | any> =
-    new BehaviorSubject(null);
+  private authData: ReplaySubject<boolean | User | any> = new ReplaySubject();
+
+  profileService = inject(ProfileService);
+
+  user$ = this.authData.asObservable().pipe(
+    switchMap((user) => {
+      if (user) {
+        return this.profileService.get(user.id);
+      } else {
+        return of(undefined);
+      }
+    }),
+    shareReplay(),
+  );
 
   constructor(
     private router: Router,
     private supabaseService: SupabaseService,
   ) {
     this.loadSignedUser();
-
     this.watchUserChange();
   }
 
@@ -26,11 +38,11 @@ export class AuthService {
     });
   }
 
-  signInWithGooglel() {
+  signInWithGooglel(redirectTo?: string) {
     return this.supabaseService.supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:4200/auth-otp',
+        redirectTo,
       },
     });
   }
@@ -39,27 +51,30 @@ export class AuthService {
     this.supabaseService.supabase.auth.signOut();
   }
 
-  get currentUser() {
-    return this._currentUser.asObservable();
-  }
-
   private async loadSignedUser() {
-    const user = await this.supabaseService.supabase.auth.getUser();
+    const session = await this.supabaseService.supabase.auth.getUser();
+    const user = session?.data?.user;
     if (user) {
-      this._currentUser.next(user);
+      this.authData.next(user);
     } else {
-      this._currentUser.next(false);
+      this.authData.next(undefined);
     }
+    return user;
   }
 
   private watchUserChange() {
-    this.supabaseService.supabase.auth.onAuthStateChange((event, session) => {
-      if (event == 'SIGNED_IN') {
-        this._currentUser.next(session!.user);
-      } else {
-        this._currentUser.next(false);
-        this.router.navigateByUrl('/', { replaceUrl: true });
-      }
-    });
+    this.supabaseService.supabase.auth.onAuthStateChange(
+      (event: AuthChangeEvent, session) => {
+        const user = session?.user;
+        switch (event) {
+          case 'SIGNED_IN':
+            this.authData.next(user);
+            break;
+          case 'SIGNED_OUT':
+            this.authData.next(undefined);
+            break;
+        }
+      },
+    );
   }
 }

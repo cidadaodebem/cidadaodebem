@@ -13,7 +13,7 @@ export class CampainService {
   list() {
     return this.db.list<Campain>('campain', [
       '*',
-      'agent (id, name)',
+      'agent (id, name, photo)',
       'author (id, name, photo)',
     ]);
   }
@@ -21,7 +21,7 @@ export class CampainService {
   get(itemId: string) {
     return this.db.get<Campain>('campain', itemId, [
       '*',
-      'agent (id, name)',
+      'agent (id, name, photo, party (id, name, short_name, website))',
       'author (id, name, photo)',
     ]);
   }

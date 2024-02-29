@@ -1,0 +1,32 @@
+<div *ngIf="agent$ | async as agent" class="agent-page content-width">
+  <h1>{{ (agent$ | async)?.name }}</h1>
+
+  <div *ngIf="agent$ | async as agent" class="agent-wrapper">
+    <div>
+      <img
+        class="avatar-big"
+        [src]="agent.photo"
+        alt="agent {{ agent.name }} photo"
+      />
+    </div>
+
+    <div class="agent-data">
+      <div>
+        Cargo:
+        <a [href]="agent.position.description" target="_blank">{{
+          agent.position.name
+        }}</a>
+      </div>
+      <div>
+        Partido:
+        <a [routerLink]="['/party', agent.party.id]">
+          {{ agent.party.short_name }} - {{ agent.party.name }}
+        </a>
+      </div>
+      <div>
+        Twitter:
+        <a [href]="agent.twitter" target="_blank">{{ agent.twitter }}</a>
+      </div>
+    </div>
+  </div>
+</div>

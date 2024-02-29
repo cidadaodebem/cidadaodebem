@@ -11,7 +11,7 @@ table {
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
-  width: 640px;
+  width: 100%;
   margin: auto;
 }
 
@@ -49,10 +49,4 @@ table tbody tr:last-of-type {
 table tbody tr.active-row {
   font-weight: bold;
   color: #009879;
-}
-
-img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
 }

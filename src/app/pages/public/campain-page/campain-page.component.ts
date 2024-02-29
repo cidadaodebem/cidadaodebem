@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UrlSanitizerPipe } from '@pipes/url-sanitizer.pipe';
 import { CampainService } from '@services/campain/campain.service';
 import { map, switchMap } from 'rxjs';
@@ -8,7 +8,7 @@ import { map, switchMap } from 'rxjs';
 @Component({
   selector: 'app-campain-page',
   standalone: true,
-  imports: [CommonModule, UrlSanitizerPipe],
+  imports: [CommonModule, UrlSanitizerPipe, RouterLink, UrlSanitizerPipe],
   templateUrl: './campain-page.component.html',
   styleUrl: './campain-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

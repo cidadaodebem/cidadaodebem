@@ -10,7 +10,13 @@ export class AgentService {
 
   upsert(item: Agent) {}
 
-  get() {
-    return this.db.get<Agent>('agent');
+  list() {
+    return this.db.list<Agent>('agent');
+  }
+
+  get(itemId: string) {
+    return this.db.get<Agent>('agent', itemId, [
+      'id, name, photo, twitter, party (id, name, short_name), position (id, name, description)',
+    ]);
   }
 }

@@ -1,4 +1,4 @@
-<div class="campain-list">
+<div class="campain-list content-width">
   <h3>Campanhas de fiscalização</h3>
 
   <table *ngIf="campainsList$ | async as campainsList">
@@ -17,11 +17,22 @@
         [routerLink]="['/campain', campain.id]"
         class="pointer"
       >
-        <td>{{ campain.title }}</td>
-        <td>{{ campain.agent.name }}</td>
-        <td>{{ campain.author.name }}</td>
+        <td>
+          <a [routerLink]="['/campain', campain.id]">{{ campain.title }}</a>
+        </td>
+        <td>
+          <a [routerLink]="['/agent', campain.agent.id]">{{
+            campain.agent.name
+          }}</a>
+        </td>
+        <td>
+          <a [routerLink]="['/profile', campain.author.id]">{{
+            campain.author.name
+          }}</a>
+        </td>
         <td>
           <img
+            class="avatar"
             [src]="campain.author.photo"
             [alt]="campain.author.name + ' user photo'"
           />

@@ -24,6 +24,7 @@
       "@models/*": ["./src/app/models/*"],
       "@constants/*": ["./src/app/constants/*"],
       "@components/*": ["./src/app/components/*"],
+      "@helpers/*": ["./src/app/helpers/*"],
       "@pipes/*": ["./src/app/pipes/*"],
       "@services/*": ["./src/app/services/*"],
       "@guards/*": ["./src/app/guards/*"]
