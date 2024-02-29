@@ -26,7 +26,7 @@ export class AuthOtpComponent {
   ) {
     this.auth.currentUser.subscribe((user) => {
       if (user) {
-        this.router.navigateByUrl('/workspace', { replaceUrl: true });
+        // this.router.navigate(['/']);
       }
     });
   }
@@ -36,6 +36,18 @@ export class AuthOtpComponent {
   async signIn() {
     this.spinner$.next(true);
     const result = await this.auth.signInWithEmail(this.email);
+
+    this.spinner$.next(false);
+    if (!result.error) {
+      this.linkSuccess = true;
+    } else {
+      alert(result.error.message);
+    }
+  }
+
+  async signInWithGoogle() {
+    this.spinner$.next(true);
+    const result = await this.auth.signInWithGooglel();
 
     this.spinner$.next(false);
     if (!result.error) {

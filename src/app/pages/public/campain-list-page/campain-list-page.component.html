@@ -4,8 +4,10 @@
   <table *ngIf="campainsList$ | async as campainsList">
     <thead>
       <tr>
-        <th>Campain</th>
-        <th>Agent</th>
+        <th>Campanha</th>
+        <th>Agente Público</th>
+        <th>Autor</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -16,7 +18,14 @@
         class="pointer"
       >
         <td>{{ campain.title }}</td>
-        <td>{{ campain.description }}</td>
+        <td>{{ campain.agent.name }}</td>
+        <td>{{ campain.author.name }}</td>
+        <td>
+          <img
+            [src]="campain.author.photo"
+            [alt]="campain.author.name + ' user photo'"
+          />
+        </td>
       </tr>
     </tbody>
   </table>

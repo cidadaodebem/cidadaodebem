@@ -11,10 +11,18 @@ export class CampainService {
   upsert(item: Campain) {}
 
   list() {
-    return this.db.list<Campain>('campain', ['*', 'agent (*)']);
+    return this.db.list<Campain>('campain', [
+      '*',
+      'agent (id, name)',
+      'author (id, name, photo)',
+    ]);
   }
 
   get(itemId: string) {
-    return this.db.get<Campain>('campain', itemId, ['*', 'agent (*)']);
+    return this.db.get<Campain>('campain', itemId, [
+      '*',
+      'agent (id, name)',
+      'author (id, name, photo)',
+    ]);
   }
 }
