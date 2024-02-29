@@ -1,1 +1,22 @@
-<p>account-page works!</p>
+<div *ngIf="profile$ | async as profile" class="profile-page content-width">
+  <h1>{{ profile.name }}</h1>
+
+  <p>{{ profile.bio }}</p>
+
+  <div class="profile-wrapper">
+    <div>
+      <img
+        class="avatar-big"
+        [src]="profile.photo"
+        alt="profile {{ profile.name }} photo"
+      />
+    </div>
+
+    <div class="profile-data">
+      <div>
+        Twitter:
+        <a [href]="profile.twitter" target="_blank">{{ profile.twitter }}</a>
+      </div>
+    </div>
+  </div>
+</div>

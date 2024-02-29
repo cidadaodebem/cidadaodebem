@@ -15,7 +15,7 @@
       >
 
       <span *ngIf="user$ | async as user">
-        <a [routerLink]="['/profile', user.id]">{{ user.name }}</a>
+        <a [routerLink]="['/account']">{{ user.name }}</a>
 
         <button (click)="logout()">Sair</button>
       </span>
